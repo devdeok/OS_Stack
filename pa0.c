@@ -60,29 +60,31 @@ int main(int argc, const char *argv[])
 
 	/* Push 4 values */
 	for (i = 0; i < 4; i++) {
-		push_stack(generate_string(buffer));
-		fprintf(stderr, "%s\n", buffer);
+		push_stack(generate_string(buffer)); // buffer에 랜덤하게 string이 담김
+		fprintf(stderr, "%s\n", buffer); // 출력
 	}
 	fprintf(stderr, "\n");
 
 	/* Dump the current stack */
-	dump_stack();
+	dump_stack(); // 현재 스택에 있는 있는 모든 문자열 bottom to top으로 출력
+
 	fprintf(stderr, "\n");
 
 	/* Pop 3 values */
 	for (i = 0; i < 3; i++) {
 		memset(buffer, 0x00, MAX_BUFFER);
 		pop_stack(buffer);
-		fprintf(stderr, "%s\n", buffer);
+		fprintf(stderr,"%s\n", buffer);
 	}
 	fprintf(stderr, "\n");
 
 	/* Dump the current stack */
 	dump_stack();
+
 	fprintf(stderr, "\n");
 
-
 	/* And so on ..... */
+	/* 없애기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	for (i = 0; i < (1 << 12); i++) {
 		push_stack(generate_string(buffer));
 	}
@@ -93,11 +95,14 @@ int main(int argc, const char *argv[])
 	dump_stack();
 	fprintf(stderr, "\n");
 
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@없애기*/
+
 	/* Empty the stack by popping out all entries */
+	/* 없애기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	while ((ret = pop_stack(buffer)) >= 0) {
 		fprintf(stderr, "%s\n", buffer);
 		memset(buffer, 0x00, MAX_BUFFER);
 	}
-
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@없애기*/
 	return EXIT_SUCCESS;
 }

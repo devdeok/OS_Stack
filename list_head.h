@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #ifndef _LINUX_LIST_H
 #define _LINUX_LIST_H
+#include <stdbool.h>
 
 /**
  * container_of - cast a member of a structure out to the containing structure
@@ -72,7 +73,6 @@ static inline void list_add(struct list_head *new, struct list_head *head)
 {
 	__list_add(new, head, head->next);
 }
-
 
 /**
  * list_add_tail - add a new entry

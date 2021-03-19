@@ -35,6 +35,12 @@ struct entry {
  * include any header files if you want to ...                        */
 
 #include <stdlib.h>                    /* like this */
+#include <string.h>
+#define MAX_BUFFER 80
+
+struct entry *temp;
+struct entry *cur;
+struct entry *curn;
 
 /**
  * push_stack()
@@ -43,13 +49,18 @@ struct entry {
  *   Push @string into the @stack. The @string should be inserted into the top
  *   of the stack. You may use either the head or tail of the list for the top.
  */
+
 void push_stack(char *string)
-{
+{	
 	/* TODO: Implement this function */
+	char* tmpstr = malloc(sizeof(char)*MAX_BUFFER);
+	strcpy(tmpstr,string);
 
-	x->prev  x->next  <---------
+	temp = (struct entry *)malloc(sizeof(struct list_head));
+	temp->string = tmpstr;
+	INIT_LIST_HEAD(&temp->list);
+	list_add_tail(&temp->list,&stack);
 }
-
 
 /**
  * pop_stack()
@@ -66,9 +77,24 @@ void push_stack(char *string)
 int pop_stack(char *buffer)
 {
 	/* TODO: Implement this function */
+
+	// buffer에 string을 담고 stack의 top부분에 entry의 string을 pop한다.
+	// stack이 비어있으면 -1을 return , 그러므로 stack이 비어있는지 체크해주어야함
+
+	if(!list_empty(&stack)){ // stack이 비어있지 않다면
+		list_for_each_entry_safe(cur,curn,&stack,list){ // top까지 순회
+			if(list_is_last(&cur->list,&stack)){ // cur->list->next == stack
+				// printf("top string : %s\n",cur->string);
+				strcpy(buffer,cur->string); // 맞다면 string을 buffer에 복사하고
+				list_del(&cur->list);
+				// printf("complete delete!!\n");
+			}
+		}
+		return 0;
+	}
+
 	return -1; /* Must fix to return a proper value when @stack is not empty */
 }
-
 
 /**
  * dump_stack()
@@ -81,7 +107,9 @@ int pop_stack(char *buffer)
 void dump_stack(void)
 {
 	/* TODO: Implement this function */
-
-	fprintf(stderr, "%s\n", "0xdeadbeef"); /* Example. 
+	list_for_each_entry(cur,&stack,list){
+		fprintf(stderr, "%s\n", cur->string);
+	}
+	 /* Example. 
 											Print out values in this form */
 }
