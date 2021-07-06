@@ -84,10 +84,8 @@ int pop_stack(char *buffer)
 	if(!list_empty(&stack)){ // stack이 비어있지 않다면
 		list_for_each_entry_safe(cur,curn,&stack,list){ // top까지 순회
 			if(list_is_last(&cur->list,&stack)){ // cur->list->next == stack
-				// printf("top string : %s\n",cur->string);
 				strcpy(buffer,cur->string); // 맞다면 string을 buffer에 복사하고
 				list_del(&cur->list);
-				// printf("complete delete!!\n");
 			}
 		}
 		return 0;

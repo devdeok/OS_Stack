@@ -84,7 +84,6 @@ int main(int argc, const char *argv[])
 	fprintf(stderr, "\n");
 
 	/* And so on ..... */
-	/* 없애기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	for (i = 0; i < (1 << 12); i++) {
 		push_stack(generate_string(buffer));
 	}
@@ -95,14 +94,11 @@ int main(int argc, const char *argv[])
 	dump_stack();
 	fprintf(stderr, "\n");
 
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@없애기*/
-
 	/* Empty the stack by popping out all entries */
-	/* 없애기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	while ((ret = pop_stack(buffer)) >= 0) {
+
+	while((ret = pop_stack(buffer)) >= 0) {
 		fprintf(stderr, "%s\n", buffer);
 		memset(buffer, 0x00, MAX_BUFFER);
 	}
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@없애기*/
 	return EXIT_SUCCESS;
 }
